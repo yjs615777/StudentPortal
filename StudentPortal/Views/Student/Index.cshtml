@@ -1,0 +1,28 @@
+﻿@model IEnumerable<StudentPortal.Contracts.Responses.StudentResponse>
+
+<h2>학생 목록</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>이름</th>
+            <th>나이</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.Name</td>
+                <td>@s.Age</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>등록된 학생이 없습니다.</p>
+}

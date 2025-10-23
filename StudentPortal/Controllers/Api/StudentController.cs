@@ -7,7 +7,7 @@ namespace StudentPortal.Controllers.Api
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentsController(IStudentService service) : ControllerBase
+    public class StudentController(IStudentService service) : ControllerBase
     {
         private readonly IStudentService _service = service;
 
@@ -24,7 +24,7 @@ namespace StudentPortal.Controllers.Api
             var r = await _service.GetByIdAsync(id, ct);
             if (!r.IsSuccess && r.Error == "NotFound") return NotFound();
             return Ok(r.Data);
-        }
+        }   
 
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] StudentCreateRequest req, CancellationToken ct)

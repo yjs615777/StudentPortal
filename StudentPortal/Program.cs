@@ -7,7 +7,6 @@ using StudentPortal.Services;
 using StudentPortal.Validations;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 
 namespace StudentPortal
@@ -16,16 +15,22 @@ namespace StudentPortal
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<SchoolContext>(opt =>
             opt.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
-            builder.Services.AddAutoMapper(typeof(StudentProfile)); // 프로필 스캔 시작점
+
+            builder.Services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<StudentProfile>();   // 네 프로필
+            });
+
+
 
             // FluentValidation (자동 모델 검증)
             builder.Services.AddControllers();
-
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddFluentValidationClientsideAdapters();
             builder.Services.AddValidatorsFromAssemblyContaining<StudentCreateRequestValidator>();
@@ -63,7 +68,7 @@ namespace StudentPortal
 
             using (var scope = app.Services.CreateScope())
             {
-                var db = scope.ServiceProvider.GetService<SchoolContext>();
+                var db = scope.ServiceProvider.GetRequiredService<SchoolContext>();
                 Console.WriteLine($"DB연결 성공 여부: {db.Database.CanConnect()}");
                 db.Database.EnsureCreated();
             }
