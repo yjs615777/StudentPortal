@@ -6,12 +6,13 @@ using StudentPortal.Services;
 
 namespace StudentPortal.Controllers.Mvc
 {
+    [Route("Student")]
     public class StudentController(IStudentService service) : Controller
     {
         private readonly IStudentService _service = service;
 
         // 목록
-        [HttpGet]
+        [HttpGet("")]
         public async Task<IActionResult> Index(CancellationToken ct)
         {
             var result = await _service.GetAllAsync(ct);
@@ -19,15 +20,15 @@ namespace StudentPortal.Controllers.Mvc
             return View(list);
         }
 
-        // 생성 폼
-        [HttpGet]
+        // 생성 폼 
+        [HttpGet("Create")]
         public IActionResult Create()
         {
             return View(new StudentCreateRequest());
         }
 
         // 생성 처리
-        [HttpPost]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentCreateRequest req, CancellationToken ct)
         {
@@ -45,7 +46,7 @@ namespace StudentPortal.Controllers.Mvc
         }
 
         // 수정 폼
-        [HttpGet]
+        [HttpGet("Edit/{id:int}")]
         public async Task<IActionResult> Edit(int id, CancellationToken ct)
         {
             var found = await _service.GetByIdAsync(id, ct);
@@ -57,7 +58,7 @@ namespace StudentPortal.Controllers.Mvc
         }
 
         // 수정 처리
-        [HttpPost]
+        [HttpPost("Delete/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, StudentUpdateRequest req, CancellationToken ct)
         {
