@@ -28,6 +28,7 @@ namespace StudentPortal.Repositories
             var delete = await _db.Students.FindAsync([id], ct);
             if (delete == null)
                 return;
+            _db.Remove(delete);
             await _db.SaveChangesAsync();
         }
 
