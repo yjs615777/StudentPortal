@@ -1,1 +1,104 @@
-﻿
+﻿@{
+}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <title>학생 조회</title>
+    <meta name="viewport" content="width=1440, initial-scale=1" />
+    <!-- Inter 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;500&display=swap" rel="stylesheet">
+    <style>
+        /* 화면 프레임: 1440 x 1071 */
+        html, body {
+            height: 100%;
+            margin: 0;
+            background: #fff;
+        }
+
+        .stage {
+            position: relative;
+            width: 1440px;
+            height: 1071px;
+            margin: 0 auto; /* 좌우 중앙 */
+            background: #fff;
+        }
+
+        /* Student Portal: 좌표 X61 Y48, 64px Bold Inter, 검정 */
+        .title-main {
+            position: absolute;
+            left: 61px;
+            top: 48px;
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #000;
+        }
+             /* Student Portal링크 보라색+밑줄생김 방지 */
+            .title-main a.title-link {
+                color: inherit;
+                text-decoration: none;
+            }
+
+        /* 학생정보: (title에서) H49 아래, 64px Bold Inter, 검정 */
+        /* 해석: title의 아래로 49px 하단 여백을 주고 배치 */
+        .title-section {
+            position: absolute;
+            left: 61px;
+            top: 174px; /* 48 + 49 */
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #000;
+        }
+
+        /* 구분선: 학생정보에서 H83 아래, 가로 1319px, 화면 가운데 정렬(수평 중앙) */
+        .divider {
+            position: absolute;
+            top: 334px; /* 97 + 83 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1319px;
+            height: 1px;
+            background: #000;
+        }
+
+        /* 헤더 라벨들(ID, 이름, 나이): 선에서 H25 위, 가로 60px 간격, Bold 36px Inter */
+        .header-row {
+            position: absolute;
+            /* 선 위 25px 위치에 텍스트 상단이 오도록 대략 배치 */
+            top: 265px; /* 180 - 25 - 36 ≒ 라벨 상단이 선 기준 25px 위쪽에 오도록 조정 */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px; /* 라벨 사이 간격 60 */
+            align-items: flex-end; /* baseline 느낌을 위해 하단 정렬 */
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <h1 class="title-main">
+            <a asp-controller="Landing" asp-action="Index" class="title-link">Student Portal</a>
+        </h1>
+
+        <h2 class="title-section">학생정보</h2>
+
+        <div class="divider"></div>
+
+        <div class="header-row">
+            <div>ID</div>
+            <div>이름</div>
+            <div>나이</div>
+        </div>
+    </div>
+</body>
+</html>
