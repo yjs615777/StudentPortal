@@ -1,4 +1,4 @@
 ﻿namespace StudentPortal.Contracts.Requests
 {
-    public record StudentUpdateRequest(string Name,int Age);
+    public record StudentUpdateRequest(int Id,string Name,int Age);
 }
