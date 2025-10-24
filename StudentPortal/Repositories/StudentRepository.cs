@@ -31,7 +31,5 @@ namespace StudentPortal.Repositories
             _db.Remove(delete);
             await _db.SaveChangesAsync();
         }
-
-        
     }
 }
