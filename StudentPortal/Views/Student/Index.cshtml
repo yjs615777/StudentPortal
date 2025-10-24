@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Linq
+@model IEnumerable<StudentPortal.Contracts.Responses.StudentResponse>
+@{
 }
 <!DOCTYPE html>
 <html lang="ko">
@@ -103,31 +105,42 @@
             font-weight: 500;
             text-decoration: none;
         }
-
-        /*  페이지네이션 숫자 */
-        .pagination {
+        /* 학생 목록 */
+        .student-row {
             position: absolute;
-            top: 914px;
-            left: 557px;
+            left: 350px;
             display: flex;
-            gap: 36px; /* 번호 간격 */
+            gap: 150px;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 20px;
-            font-weight: 300;
-            line-height: 24px;
-            letter-spacing: -0.02em;
+            font-size: 28px;
+            font-weight: 500;
             color: #000;
         }
 
-            .pagination div {
-                width: 24px;
-                text-align: center;
-            }
+        /* 수정 / 삭제 버튼 */
+        .btn-edit, .btn-delete {
+            width: 63px;
+            height: 44px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
 
-            /* ⋯ 점 표시 */
-            .pagination .dots {
-                width: 17px;
-            }
+        .btn-edit {
+            background: #1491FF;
+            margin-right: 8px;
+        }
+
+        .btn-delete {
+            background: #FF3B30;
+        }
 
     </style>
 </head>
@@ -148,7 +161,30 @@
         </div>
         <!--  추가 버튼 -->
         <a asp-controller="Student" asp-action="Create" class="btn-add">추가</a>
+        <!-- DB에서 불러온 학생 출력 -->
+        @{
+            int offset = 0;
+        }
+        @foreach (var s in Model.OrderBy(x => x.Id))
+        {
+            <div class="student-row" style="top:@(360 + offset)px;">
+                <div>@s.Id</div>
+                <div>@s.Name</div>
+                <div>@s.Age</div>
 
+                <div style="margin-left:60px;">
+                    <a asp-action="Edit" asp-route-id="@s.Id" class="btn-edit">수정</a>
+
+                    <form asp-action="Delete" asp-route-id="@s.Id" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-delete" onclick="return confirm('정말 삭제할까요?');">삭제</button>
+                    </form>
+                </div>
+            </div>
+            offset += 60;
+
+            <!-- 다음 행 간격 -->
+        }
     </div>
 </body>
 </html>
