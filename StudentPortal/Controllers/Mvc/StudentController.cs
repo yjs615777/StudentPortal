@@ -76,18 +76,15 @@ namespace StudentPortal.Controllers.Mvc
         }
 
         // 삭제
-        [HttpDelete("Delete/{id:int}")]
+        [HttpPost("Delete/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, CancellationToken ct)
         {
             var deleted = await _service.DeleteAsync(id, ct);
             if (!deleted.IsSuccess)
-            {
                 TempData["Error"] = deleted.Error ?? "삭제 실패";
-            }
-           
-            return RedirectToAction(nameof(Index));
 
+            return RedirectToAction(nameof(Index));
         }
     }
 }
