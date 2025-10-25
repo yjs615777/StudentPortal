@@ -10,39 +10,6 @@ Entity Framework Core를 활용한 데이터베이스 CRUD 처리를 학습하�
 실무 구조 기반 + 취업 포트폴리오 제출용 코드 품질을 목표로 구성되었습니다.
 
 
-## 프로젝트 구조
-
-StudentPortal/
-├── Controllers/
-│   ├── Mvc/
-│   │   └── StudentController.cs       → MVC UI용 CRUD 로직
-│   └── Api/
-│       └── StudentController.cs       → REST API (미사용, 보존용)
-│
-├── Contracts/
-│   ├── Requests/
-│   │   ├── StudentCreateRequest.cs
-│   │   └── StudentUpdateRequest.cs
-│   └── Responses/
-│       └── StudentResponse.cs
-│
-├── Data/
-│   └── SchoolContext.cs               → EF Core DbContext
-│
-├── Repositories/
-│   └── StudentRepository.cs           → DB 접근 로직 (CRUD)
-│
-├── Services/
-│   └── StudentService.cs              → 비즈니스 로직 계층
-│
-├── Views/
-│   └── Student/
-│       ├── Index.cshtml               → 학생 목록
-│       ├── Create.cshtml              → 추가 페이지
-│       └── Edit.cshtml                → 수정 페이지
-│
-└── README.md                          → 현재 문서
-
 ## 주요 기능
 
 학생 목록 조회 (Index)	DB에 저장된 학생 정보를 테이블 형태로 조회
